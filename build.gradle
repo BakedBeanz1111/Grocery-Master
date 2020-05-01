@@ -22,30 +22,12 @@ allprojects {
     }
 }
 
-apply plugin: 'findbugs'
-
-task customFindbugs(type: FindBugs) {
-    ignoreFailures = false
-    effort = "max"
-    reportLevel = "low"
-    classes = files("$project.buildDir/intermediates/classes")
-
-    // Use this only if you want exclude some errors
-    excludeFilter = file("$rootProject.rootDir/config/findbugs/exclude.xml")
-
-    source = fileTree('src/main/java/')
-    classpath = files()
-
-    reports {
-        xml.enabled = false
-        xml.withMessages = true
-        html.enabled = !xml.isEnabled()
-        xml.destination "$project.buildDir/outputs/findbugs/findbugs-output.xml"
-        html.destination "$project.buildDir/outputs/findbugs/findbugs-output.html"
-    }
+spotbugs {
+  toolVersion = '4.0.2'
 }
-
-build.dependsOn customFindbugs
+dependencies {
+  spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.10.1'
+}
 
 
 task clean(type: Delete) {
