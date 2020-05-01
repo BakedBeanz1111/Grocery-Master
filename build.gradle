@@ -22,33 +22,29 @@ allprojects {
     }
 }
 
-apply plugin: 'checkstyle'
-checkstyle {
-    toolVersion '7.8.1'
-    configFile file("config/checkstyle/checkstyle.xml")
-}
-checkstyleMain {
-    source ='app/src/main/java'
-}
-checkstyleTest {
-    source ='app/src/test/java'
-}
-
 apply plugin: 'findbugs'
-findbugs {
+
+task customFindbugs(type: FindBugs) {
     ignoreFailures = false
-    toolVersion = "3.0.1"
-    sourceSets=[sourceSets.main]
-    excludeFilter = file("config/findbugs/excludeFilter.xml")
-    reportsDir = file("$project.buildDir/reports/findbugs")
     effort = "max"
-}
-tasks.withType(FindBugs) {
+    reportLevel = "low"
+    classes = files("$project.buildDir/intermediates/classes")
+
+    // Use this only if you want exclude some errors
+    excludeFilter = file("$rootProject.rootDir/config/findbugs/exclude.xml")
+
+    source = fileTree('src/main/java/')
+    classpath = files()
+
     reports {
-        xml.enabled false
-        html.enabled true
+        xml.enabled = false
+        xml.withMessages = true
+        html.enabled = !xml.isEnabled()
+        xml.destination "$project.buildDir/outputs/findbugs/findbugs-output.xml"
+        html.destination "$project.buildDir/outputs/findbugs/findbugs-output.html"
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
