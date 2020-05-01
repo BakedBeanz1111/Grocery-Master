@@ -45,6 +45,8 @@ task customFindbugs(type: FindBugs) {
     }
 }
 
+build.dependsOn customFindbugs
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
