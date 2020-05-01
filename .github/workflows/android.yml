@@ -23,3 +23,14 @@ jobs:
       run: ./gradlew build
     - name: Gradle Lint
       run: ./gradlew lint
+    - name: Run java checkstyle
+      uses: nikitasavinov/checkstyle-action@0.1.0
+      with:
+      # GITHUB_TOKEN.
+      github_token: # optional, default is ${{ github.token }}
+      # Report level for reviewdog [info,warning,error]
+      level: # optional, default is info
+      # Reporter of reviewdog command [github-pr-check,github-pr-review]
+      reporter: # optional, default is github-pr-check
+      # Checkstyle config file
+      checkstyle_config: # default is google_checks.xml
