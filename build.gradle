@@ -28,10 +28,10 @@ checkstyle {
     configFile file("config/checkstyle/checkstyle.xml")
 }
 checkstyleMain {
-    source ='src/main/java'
+    source ='app/src/main/java'
 }
 checkstyleTest {
-    source ='src/test/java'
+    source ='app/src/test/java'
 }
 
 apply plugin: 'findbugs'
