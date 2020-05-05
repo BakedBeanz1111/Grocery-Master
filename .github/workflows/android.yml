@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -23,3 +22,11 @@ jobs:
       run: ./gradlew build
     - name: Gradle Lint
       run: ./gradlew lint
+    
+    - name: Build debug APK
+      run: ./gradlew assembleDebug --stacktrace
+    - name: Upload APK
+      uses: actions/upload-artifact@v1
+      with:
+        name: app
+        path: app/build/outputs/apk/debug/app-debug.apk 
