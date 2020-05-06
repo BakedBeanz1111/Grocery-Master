@@ -25,3 +25,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+lintOptions {
+	abortOnError false
+	quiet true
+	lintConfig file(‘./code_quality_tools/lint.xml’)
+}

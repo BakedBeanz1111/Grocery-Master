@@ -1,0 +1,14 @@
+<FindBugsFilter>
+	<Match>
+		<Class name=”~.*R\$.*”/>
+    </Match>
+    <Match>
+		<Class name=”~.*Manifest\$.*”/>
+	</Match>
+    <Match>
+		<Class name=”~.*Dagger*.*”/>
+	</Match>
+	<Match>
+		<Bug pattern=”ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD” />
+	</Match>
+</FindBugsFilter>
