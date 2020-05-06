@@ -33,10 +33,3 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 }
-
-apply from: ‘/code_quality_tools/quality.gradle’
-lintOptions {
-	abortOnError false
-	quiet true
-	lintConfig file(‘./code_quality_tools/lint.xml’)
-}
