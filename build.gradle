@@ -29,5 +29,5 @@ task clean(type: Delete) {
 lintOptions {
 	abortOnError false
 	quiet true
-	lintConfig file(‘./code_quality_tools/lint.xml’)
+	lintConfig file(‘app/code_quality_tools/lint.xml’)
 }
