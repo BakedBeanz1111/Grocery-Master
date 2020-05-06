@@ -35,3 +35,8 @@ dependencies {
 }
 
 apply from: ‘/code_quality_tools/quality.gradle’
+lintOptions {
+	abortOnError false
+	quiet true
+	lintConfig file(‘./code_quality_tools/lint.xml’)
+}
