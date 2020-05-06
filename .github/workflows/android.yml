@@ -20,8 +20,13 @@ jobs:
       run: chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Gradle Lint
+    - name: Lint
       run: ./gradlew lint
+    - name: Upload Lint Results
+      uses: actions/upload-artifact@v1
+      with:
+        name: lint.html
+        path: app/build/reports/lint-results.html
     
     - name: Build debug APK
       run: ./gradlew assembleDebug --stacktrace
