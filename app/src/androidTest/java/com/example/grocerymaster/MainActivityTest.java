@@ -35,13 +35,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class UIRegression {
+public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void uIRegression() {
+    public void mainActivityTest() {
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.add), withContentDescription("Add"),
                         childAtPosition(
@@ -60,7 +60,7 @@ public class UIRegression {
                                         0),
                                 17),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("1"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("thing 1"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.lineItem2),
@@ -70,17 +70,17 @@ public class UIRegression {
                                         0),
                                 8),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("2"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("thing 2"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.lineItem3),
+        ViewInteraction appCompatCheckBox = onView(
+                allOf(withId(R.id.checkBox1),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.appcompat.widget.ContentFrameLayout")),
                                         0),
-                                9),
+                                20),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("3"), closeSoftKeyboard());
+        appCompatCheckBox.perform(click());
 
         ViewInteraction actionMenuItemView2 = onView(
                 allOf(withContentDescription("Item"),
@@ -102,7 +102,7 @@ public class UIRegression {
                         isDisplayed()));
         actionMenuItemView3.perform(click());
 
-        ViewInteraction appCompatEditText4 = onView(
+        ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.lineItem1),
                         childAtPosition(
                                 childAtPosition(
@@ -110,9 +110,9 @@ public class UIRegression {
                                         0),
                                 17),
                         isDisplayed()));
-        appCompatEditText4.perform(replaceText("thing 1"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("thing 3"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText5 = onView(
+        ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.lineItem2),
                         childAtPosition(
                                 childAtPosition(
@@ -120,7 +120,17 @@ public class UIRegression {
                                         0),
                                 8),
                         isDisplayed()));
-        appCompatEditText5.perform(replaceText("thing 2"), closeSoftKeyboard());
+        appCompatEditText4.perform(replaceText("thing 4"), closeSoftKeyboard());
+
+        ViewInteraction appCompatCheckBox2 = onView(
+                allOf(withId(R.id.checkBox2),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.appcompat.widget.ContentFrameLayout")),
+                                        0),
+                                7),
+                        isDisplayed()));
+        appCompatCheckBox2.perform(click());
 
         ViewInteraction actionMenuItemView4 = onView(
                 allOf(withContentDescription("Item"),
@@ -137,44 +147,7 @@ public class UIRegression {
                         childAtPosition(
                                 withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
                                 0)));
-        recyclerView.perform(actionOnItemAtPosition(0, click()));
-
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.lineItem3),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.appcompat.widget.ContentFrameLayout")),
-                                        0),
-                                9),
-                        isDisplayed()));
-        appCompatEditText6.perform(replaceText("thing 3"), closeSoftKeyboard());
-
-        ViewInteraction appCompatCheckBox = onView(
-                allOf(withId(R.id.checkBox3),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.appcompat.widget.ContentFrameLayout")),
-                                        0),
-                                21),
-                        isDisplayed()));
-        appCompatCheckBox.perform(click());
-
-        ViewInteraction actionMenuItemView5 = onView(
-                allOf(withContentDescription("Item"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.action_bar),
-                                        1),
-                                0),
-                        isDisplayed()));
-        actionMenuItemView5.perform(click());
-
-        ViewInteraction recyclerView2 = onView(
-                allOf(withId(R.id.recycle),
-                        childAtPosition(
-                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                0)));
-        recyclerView2.perform(actionOnItemAtPosition(0, longClick()));
+        recyclerView.perform(actionOnItemAtPosition(0, longClick()));
 
         ViewInteraction appCompatButton = onView(
                 allOf(withClassName(is("androidx.appcompat.widget.AppCompatButton")), withText("YES"),
@@ -184,6 +157,18 @@ public class UIRegression {
                                         0),
                                 3)));
         appCompatButton.perform(scrollTo(), click());
+
+        ViewInteraction actionMenuItemView5 = onView(
+                allOf(withId(R.id.about), withContentDescription("About"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                1),
+                        isDisplayed()));
+        actionMenuItemView5.perform(click());
+
+        pressBack();
 
         ViewInteraction actionMenuItemView6 = onView(
                 allOf(withId(R.id.delete), withContentDescription("delete"),
@@ -205,16 +190,53 @@ public class UIRegression {
         appCompatButton2.perform(scrollTo(), click());
 
         ViewInteraction actionMenuItemView7 = onView(
-                allOf(withId(R.id.about), withContentDescription("About"),
+                allOf(withId(R.id.add), withContentDescription("Add"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.action_bar),
                                         1),
-                                1),
+                                2),
                         isDisplayed()));
         actionMenuItemView7.perform(click());
 
-        pressBack();
+        ViewInteraction appCompatEditText5 = onView(
+                allOf(withId(R.id.lineItem1),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.appcompat.widget.ContentFrameLayout")),
+                                        0),
+                                17),
+                        isDisplayed()));
+        appCompatEditText5.perform(replaceText("a"), closeSoftKeyboard());
+
+        ViewInteraction actionMenuItemView8 = onView(
+                allOf(withContentDescription("Item"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView8.perform(click());
+
+        ViewInteraction actionMenuItemView9 = onView(
+                allOf(withId(R.id.delete), withContentDescription("delete"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView9.perform(click());
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withClassName(is("androidx.appcompat.widget.AppCompatButton")), withText("YES"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.buttonPanel),
+                                        0),
+                                3)));
+        appCompatButton3.perform(scrollTo(), click());
     }
 
     private static Matcher<View> childAtPosition(
