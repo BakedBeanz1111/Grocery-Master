@@ -16,6 +16,8 @@ import static com.example.grocerymaster.MainActivity.getMainList;
 import static java.lang.System.out;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
@@ -75,8 +77,29 @@ public class MainActivityTest {
         actual.add("peach");
         assertEquals(expected,g.getGroceries());
 
-
     }
+    @Test
+    public void testDeleteList(){
+        /*
+        testDeleteList first checks that clearing the main list results in a maintained size of 0.
+         */
 
+        int expected=0;
+        getMainList().clear();
+        int actual=getMainList().size();
+        assertEquals(expected, actual);
+
+
+        ArrayList<String> actual1=new ArrayList<String>();//empty set of groceries
+        GroceryList firstList1=new GroceryList();
+
+        firstList1.setGroceries(actual1);//adds empty set to grocery instance
+        getMainList().add(firstList1);//adds grocery list to mainList
+
+        assertEquals(1, getMainList().size());//ensures that size was increased as list added
+        getMainList().remove(firstList1);//removes List1 from Main List
+        assertEquals(0, getMainList().size());//ensures mainList size was decreased by 1.
+        assertNotSame(getMainList().indexOf(0), firstList1);//ensures mainList index 0 is not equal to List1
+    }
 
 }
