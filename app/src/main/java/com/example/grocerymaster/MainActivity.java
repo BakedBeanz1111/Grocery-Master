@@ -202,11 +202,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     builder.setItems(lst2, (dialog, which) -> {
                         if (which == 0) {
                             mainList.addAll(deletedList);
-                            listAdapter.notifyDataSetChanged();
                             deletedList.clear();
+                            Collections.sort(mainList, comp);
+                            listAdapter.notifyDataSetChanged();
                         } else {
-                            mainList.add(deletedList.get(which));
-                            deletedList.remove(which);
+                            mainList.add(deletedList.get(which-1));
+                            deletedList.remove(which-1);
+                            Collections.sort(mainList, comp);
                             listAdapter.notifyDataSetChanged();
                         }
                     });
@@ -274,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         position = recyclerView.getChildLayoutPosition(v);
         selection = mainList.get(position);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete List " + (position + 1) + "?");
+        builder.setTitle("Delete List " + (selection.getTitle()) + "?");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
