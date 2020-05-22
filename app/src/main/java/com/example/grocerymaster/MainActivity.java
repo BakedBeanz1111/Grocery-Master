@@ -34,6 +34,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }.getType();
     private Type listType2 = new TypeToken<Map<String, Boolean>>() {
     }.getType();
-    private static final String TAG = "kevin";
+    public static Comparator<GroceryList> comp = new dateComparator(); //changes comparator object on user input for sorting, defaults on Date
 
     /*called when the application starts, here we setup our views and get JSON data*/
     @Override
@@ -243,6 +244,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     AlertDialog dialog2 = builder2.create();
                     dialog2.show();
                 }
+                break;
+            case R.id.sortlist:
+                sortList();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -303,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 GroceryList groc = (GroceryList) data.getSerializableExtra("LIST");
                 deleteDups(groc);
                 mainList.add(groc);
-                Collections.sort(mainList, Collections.reverseOrder());
+                Collections.sort(mainList, comp);
                 listAdapter.notifyDataSetChanged();
 
             }
@@ -321,6 +326,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mainList.remove(g);
             }
         }
+    }
+    /*this method is called when user clicks on the sort button in the menu, it chooses a comparator
+    * based on input then sorts, sort will default at date*/
+    public void sortList() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose a sort criteria");
+        String[] lst = {"Date", "List Size", "Alphabetical", "# of checked items"};
+        builder.setItems(lst, (dialog, which) -> {
+            if (which == 0) {
+                comp = new dateComparator();
+            } else if (which == 1) {
+                comp = new listSizeComparator();
+            } else if (which == 2) {
+                comp = new alphabeticalComparator();
+            } else {
+                comp = new checksSizeComparator();
+            }
+            Collections.sort(mainList, comp);
+            listAdapter.notifyDataSetChanged();
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /*This method is called whenever the application is about to close, or before the orientation
