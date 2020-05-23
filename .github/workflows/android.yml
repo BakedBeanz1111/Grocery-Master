@@ -23,11 +23,14 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
   
-    #- name: run ui tests
-    #  uses: reactivecircus/android-emulator-runner@v2
-    #  with:
-    #    api-level: 29
-    #    script: ./gradlew connectedCheck --stacktrace
+    - name: run ui tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        script: ./gradlew connectedCheck --stacktrace
+        
+    - name: run unit tests
+      run: ./gradlew test
     
     - name: Lint
       run: ./gradlew lint
