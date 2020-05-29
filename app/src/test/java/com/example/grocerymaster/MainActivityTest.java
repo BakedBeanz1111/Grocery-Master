@@ -177,5 +177,22 @@ public class MainActivityTest {
 
 
     }
+       @Test
+    public void testDateComparator(){
+        /*
+        Testing date comparison method of Groceries
+        */
+        GroceryList firstList4=new GroceryList();
+        GroceryList secondList4=new GroceryList();
+
+        firstList4.setDate(1590719197);
+        secondList4.setDate((1590719230));
+
+        dateComparator set3=new dateComparator();
+        int compare=set3.compare(firstList4,secondList4);
+
+        int expected=1;
+        assertEquals(expected, compare);
+    }
 
 }
