@@ -101,5 +101,80 @@ public class MainActivityTest {
         assertEquals(0, getMainList().size());//ensures mainList size was decreased by 1.
         assertNotSame(getMainList().indexOf(0), firstList1);//ensures mainList index 0 is not equal to List1
     }
+    @Test
+    public void testAlphabeticalComparator(){
+        /*
+        The purpose of this test is to ensure that lists are sorted alphabetically.
+        Both lists are compared and firstList2 should be the higher list alphabetically resulting in
+        a returned value of 1 (greater)
+         */
+        GroceryList firstList2=new GroceryList();
+        GroceryList secondList2=new GroceryList();
+
+        firstList2.setTitle("B-LIST");
+        secondList2.setTitle("A-LIST");
+        getMainList().add(firstList2);
+        getMainList().add(secondList2);
+        int expected=1;
+        alphabeticalComparator set=new alphabeticalComparator();
+        int compare=set.compare(firstList2, secondList2);
+        assertEquals(expected, compare);
+
+
+    }
+
+    @Test
+    public void testChecksSizeComparator(){
+        GroceryList firstList3=new GroceryList();
+        GroceryList secondList3=new GroceryList();
+
+        HashMap<String, Boolean> bigList=new HashMap<String, Boolean>(){{
+            put("Banana", true);
+            put("orange", true);
+            put("muffins", true);
+        }};
+        HashMap<String, Boolean> smallList=new HashMap<String, Boolean>(){{
+            put("banana", true);
+        }};
+
+        firstList3.setGroceryChecks(smallList);
+        secondList3.setGroceryChecks(bigList);
+        getMainList().add(firstList3);
+        getMainList().add(secondList3);
+
+        checksSizeComparator set1= new checksSizeComparator();
+        int compare=set1.compare(firstList3, secondList3); //firstList2 < secondList2
+        int expected=1;
+        assertEquals(expected, compare);
+
+
+    }
+    @Test
+    public void testListSizeComparator(){
+        GroceryList firstList3=new GroceryList();
+        GroceryList secondList3=new GroceryList();
+
+        ArrayList<String> bigList=new ArrayList<String>(){{
+            add("banana");
+            add("orange");
+            add("muffins");
+        }};
+        ArrayList<String> smallList=new ArrayList<String>(){{
+            add("banana");
+
+        }};
+
+        firstList3.setGroceries(smallList);
+        secondList3.setGroceries(bigList);
+        getMainList().add(firstList3);
+        getMainList().add(secondList3);
+
+        listSizeComparator set1= new listSizeComparator();
+        int compare=set1.compare(firstList3, secondList3); //firstList2 < secondList2
+        int expected=1;
+        assertEquals(expected, compare);
+
+
+    }
 
 }
